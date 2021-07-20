@@ -1,0 +1,57 @@
+﻿@model WebApplication1.Models.ViewModels.AccountViewModel
+
+@{ 
+    ViewData["Title"] = "Settings";
+}
+
+<div>
+    <h1>Settings</h1>
+    <div class="row col-5">
+        <form asp-action="Index" asp-controller="Account">
+            <div class="validation" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <h4 class="control-label font-weight-normal">
+                    <label class="control-label" asp-for="Identifier">Identifier : @Html.DisplayFor(x => Model.Identifier)</label>
+                </h4>
+            </div>
+            <div class="form-check">
+                <div class="form-group">
+                    <input class="form-check-input-me" type="checkbox" asp-for="Visible" >
+                    <label class="form-check-label" >Visible</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">User name</label>
+                <input type="text" asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input type="email" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Password</label>
+                <input type="password" asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .form-check-input-me {
+        position: absolute;
+        margin-top: 0.3rem;
+        margin-left: -1.25rem;
+        transform: scale(1.25);
+    }
+</style>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

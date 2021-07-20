@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebApplication1.Models.ViewModels.FriendsViewModel>
+
+@{ 
+    ViewData["Title"] = "Friends";
+}
+
+<div class="text-center">
+    <h1 class="display-3">Friends</h1>
+
+    <div class="col-5 row text-light form-inline ">
+        <form asp-controller="User" asp-action="Friends">
+            <p>
+                <input class="form-control mr-sm-2" type="search" name="searchUser" placeholder="Search..." aria-label="Search">
+                <input type="submit" value="Search" class="btn btn-primary text-light my-2 my-sm-0" />
+            </p>
+        </form>
+    </div>
+
+    <div class="Form-group">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <th>
+                                @Html.DisplayFor(u => user.UserName)
+                            </th>
+                            <th>
+                                <a asp-controller="Chat" asp-action="Index" asp-route-id="@user.FriendId">Talk</a> |
+                                <a asp-controller="User" asp-action="DeleteFriend" asp-route-id="@user.FriendId">Delete</a>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication1.Models.DBModels.User>
+
+@{ 
+    ViewData["Title"] = "Users";
+}
+
+<div>
+    <h2>All Users</h2>
+
+    <div class="col-5 row text-light form-inline my-2 my-lg-0">
+        <form asp-controller="User" asp-action="Index">
+            <p>
+                <input class="form-control mr-sm-2" type="search" name="searchUser" placeholder="Search..." aria-label="Search">
+                <input type="submit" value="Search" class="btn btn-primary text-light my-2 my-sm-0" />
+            </p>
+        </form>
+    </div>
+
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <th>
+                            @Html.DisplayFor(u => user.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(u => user.Email)
+                        </th>
+                        <th>
+                            <a asp-controller="Chat" asp-action="Index" asp-route-id="@user.Id">Talk</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
